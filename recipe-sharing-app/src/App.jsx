@@ -1,7 +1,10 @@
-import React from "react";
-import RecipeList from "./components/RecipeList";
+import "./App.css";
 import AddRecipeForm from "./components/AddRecipeForm";
-import { Route, Router, Routes } from "react-router-dom";
+import FavoritesList from "./components/FavoritesList";
+import RecipeDetails from "./components/RecipeDetails";
+import RecipeList from "./components/RecipeList";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import RecommendationList from "./components/RecommendationsList";
 function App() {
   return (
     <>
