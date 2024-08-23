@@ -13,6 +13,8 @@ function App() {
               <>
                 <RecipeList />
                 <AddRecipeForm />
+                <FavoritesList />
+                <RecommendationList />
               </>
             }
           />
