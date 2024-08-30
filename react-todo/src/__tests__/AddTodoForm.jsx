@@ -1,10 +1,15 @@
-import { render, fireEvent, screen } from "@testing-library/react";
+import { render, screen, fireEvent } from '@testing-library/react';
+import TodoList from '../TodoList';
 
-test("adds a new todo item", () => {
-    render(<AddTodoForm />);
+test('allows user to add a todo', () => {
+  render(<TodoList />);
+  const inputElement = screen.getByRole('textbox');
+  const addButton = screen.getByText(/add todo/i);
 
-    fireEvent.change(screen.getByRole('textbox'), { target: { value: 'New Todo' } });
-    fireEvent.click(screen.getByText('Add'));
+  fireEvent.change(inputElement, { target: { value: 'New Todo' } });
+  fireEvent.click(addButton);
 
-    expect(screen.getByRole('textbox')).toHaveValue('');
+  const todoElements = screen.getAllByRole('listitem');
+  expect(todoElements).toHaveLength(4);
+  expect(screen.getByText(/new todo/i)).toBeInTheDocument();
 });

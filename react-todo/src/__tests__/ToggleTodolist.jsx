@@ -1,9 +1,11 @@
-
-test("test with write", () => {
+test('allows user to toggle a todo', () => {
     render(<TodoList />);
-
-    const checkbox = screen.getByRole('checkbox');
-    fireEvent.click(checkbox);
-
-    expect(checkbox).toBeChecked();
-});
+    const firstTodo = screen.getByText(/learn react/i);
+  
+    fireEvent.click(firstTodo);
+    expect(firstTodo).toHaveStyle('text-decoration: line-through');
+  
+    fireEvent.click(firstTodo);
+    expect(firstTodo).toHaveStyle('text-decoration: none');
+  });
+  

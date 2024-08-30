@@ -1,58 +1,70 @@
-import React from "react";
 
+import React, { useState } from 'react';
 
- function TodoList() {
-    const todos = useTodo(state => state.todo);
-    const remove = useTodo(state => state.removeTodo);
-    const check = useTodo(state => state.checkedTodo);
-    function removeTodo(id) {
-        remove(id);
-    }
+const TodoList = () => {
+  const [todos, setTodos] = useState([
+    { id: 1, text: 'Learn React', completed: false },
+    { id: 2, text: 'Build a Todo List', completed: false },
+  ]);
 
-    function handleChange(id) {
-        check(id);
-    }
+  const addTodo = (text) => {
+    setTodos([...todos, { id: Date.now(), text, completed: false }]);
+  };
 
-    return (
-        <div>
-            {todos.map((item) => (
-                <li key={item.id}>
-                    <input type="checkbox"
-                        checked={item.isHeld}
-                        onChange={() => handleChange(item.id)}
-                    />
-                    <span>{item.text}</span>
-                    <button onClick={() => removeTodo(item.id)}>Remove</button>
-                </li>
-            ))}
-        </div>
+  const toggleTodo = (id) => {
+    setTodos(
+      todos.map((todo) =>
+        todo.id === id ? { ...todo, completed: !todo.completed } : todo
+      )
     );
-}
+  };
 
+  const deleteTodo = (id) => {
+    setTodos(todos.filter((todo) => todo.id !== id));
+  };
 
- function AddTodoForm() {
-    const [Text, setText] = useState("");
-    const addText = useTodo(state => state.addTodo);
+  return (
+    <div>
+      <h1>Todo List</h1>
+      <AddTodoForm onAddTodo={addTodo} />
+      <ul>
+        {todos.map((todo) => (
+          <li key={todo.id}>
+            <span
+              onClick={() => toggleTodo(todo.id)}
+              style={{ textDecoration: todo.completed ? 'line-through' : 'none' }}
+            >
+              {todo.text}
+            </span>
+            <button onClick={() => deleteTodo(todo.id)}>Delete</button>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+};
 
-    function handleChange(e) {
-        setText(e.target.value);
+const AddTodoForm = ({ onAddTodo }) => {
+  const [text, setText] = useState('');
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (text.trim()) {
+      onAddTodo(text);
+      setText('');
     }
+  };
 
-    function handleSubmit(e) {
-        e.preventDefault();
-        addText(Text);
-        setText("");
-    }
+  return (
+    <form onSubmit={handleSubmit}>
+      <input
+        type="text"
+        value={text}
+        onChange={(e) => setText(e.target.value)}
+      />
+      <button type="submit">Add Todo</button>
+    </form>
+  );
+};
 
-    return (
-        <form onSubmit={handleSubmit}>
-            <input type="text"
-                name="Text"
-                value={Text}
-                onChange={handleChange}
-            />
-            <button type="submit">Add</button>
-        </form>
-    );
-}
 export default TodoList;
