@@ -16,7 +16,7 @@ return (
         <Link className="flex justify-center" to={`/recipe/${recipe.id}`} >
           <div
             key={recipe.id}
-            className=" shadow-xl bg-neutral-50 m-5 ">
+            className=" shadow-xl bg-neutral-50 m-5 rounded-lg">
             <h1 className="font-mono font-bold text-blue-600 mx-2">{recipe.title}</h1>
             <p className="italic text-black-600 p-2">{recipe.summary}</p>
             <img
