@@ -18,6 +18,11 @@ function RecipeDetail() {
      <img src={recipe.image} alt={recipe.title} className="m-auto py-5" />
       <h1 className="font-bold text-blue-600 mx-2 text-lg">{recipe.title}</h1>
       <p className="italic text-black-600 ml-6 pb-5 ">{recipe.summarys}</p>
+      <h3 className="font-semibold ml-5 mt-2">Ingredients:</h3>
+      <p className="font-light ml-6">{recipe.ingredients}</p>
+      <h3 className="font-semibold ml-5">Instructions:</h3>
+      <p className="font-light ml-6 pb-5 ">{recipe.instructions}</p>
+      
     </div>
   );
 }
