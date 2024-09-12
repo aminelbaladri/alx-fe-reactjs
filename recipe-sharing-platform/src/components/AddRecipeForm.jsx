@@ -45,7 +45,7 @@ const AddRecipeForm = () => {
         e.preventDefault();
         const newErrors = {};
 
-        // Basic validation
+        
         if (!recipe.title) newErrors.title = 'Title is required';
         if (!recipe.ingredients || recipe.ingredients.split('\n').length < 2) newErrors.ingredients = 'Please provide at least two ingredients';
         if (!recipe.steps) newErrors.steps = 'Instructions are required';
@@ -58,8 +58,7 @@ const AddRecipeForm = () => {
         } else {
             const recipeId = data.length + 1;
             data.push({ ...recipe, id: recipeId });
-            // Handle successful submission (e.g., post data to an API)
-            console.log(recipe);
+           
             setErrors({});
             setIsSubmitted(true);
             setRecipe({
@@ -73,7 +72,7 @@ const AddRecipeForm = () => {
         }
     }
     return (
-        <div className="bg-neutral-50 p-3 shadow-lg sm:w-full md:w-1/2 m-auto mt-3 rounded-sm">
+        <div className="bg-lime-50 p-3 shadow-lg sm:w-full md:w-1/2 m-auto mt-3 rounded-sm">
           <form
             className="flex flex-col place-items-center gap-5 mt-2"
             onSubmit={handleSubmit}
@@ -82,49 +81,45 @@ const AddRecipeForm = () => {
               type="text"
               name="title"
               id="title"
-              placeholder="Enter recipe name"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
-              className="border-solid border-2 border-yellow-600 rounded-md p-2"
+              className="border-solid border-2 border-amber-600 rounded-md p-2"
             />
-            {errors.title && <span className="text-red-600">{errors.title}</span>}
+            {errors.title && <span className="text-orange-600">{errors.title}</span>}
             <input
               type="text"
               name="summary"
               id="summary"
-              placeholder="Enter recipe summary"
               value={summary}
               onChange={(e) => setSummary(e.target.value)}
-              className="border-solid border-2 border-yellow-600 rounded-md p-2"
+              className="border-solid border-2 border-amber-600 rounded-md p-2"
             />
             {errors.summary && (
-              <span className="text-red-600">{errors.summary}</span>
+              <span className="text-orange-600">{errors.summary}</span>
             )}
             <textarea
               name="ingredients"
               id="ingredients"
               cols="45"
-              placeholder="Enter ingredients"
               value={ingredients}
               onChange={(e) => setIngredients(e.target.value)}
-              className="border-solid border-2 border-yellow-600 rounded-md p-2"
+              className="border-solid border-2 border-amber-600 rounded-md p-2"
             />
             {errors.ingredients && (
-              <span className="text-red-600">{errors.ingredients}</span>
+              <span className="text-orange-600">{errors.ingredients}</span>
             )}
             <textarea
               name="instructions"
               id="instructions"
               cols="45"
-              placeholder="Enter cooking instructions"
               value={steps}
               onChange={(e) => setSteps(e.target.value)}
-              className="border-solid border-2 border-yellow-600 rounded-md p-2"
+              className="border-solid border-2 border-amber-600 rounded-md p-2"
             />
-            {errors.steps && <span className="text-red-600">{errors.steps}</span>}
+            {errors.steps && <span className="text-orange-600">{errors.steps}</span>}
             <button
               type="submit"
-              className="bg-yellow-600 text-neutral-50 rounded-lg p-3 font-bold"
+              className="bg-amber-50 text-neutral-50 rounded-lg p-3 font-bold"
             >
               Add Recipe
             </button>
